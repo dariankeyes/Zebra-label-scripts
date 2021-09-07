@@ -3,22 +3,23 @@ import 'dart:core';
 import 'dart:typed_data';
 
 void main() async {
+  // set printer_ip and printer_port variables
+  // String? printer_ip = '12';
+  // int? printer_port = 12;
+
+  var printer = {'ip': printer_ip, 'port': printer_port};
 
   print("Name:");
   String? name = stdin.readLineSync();
-
   print("User ID:");
   String? userID = stdin.readLineSync();
-
   print("Ticket Number:");
   String? ticketNumber = stdin.readLineSync();
-
   print("Call (Y/N:");
   String? callUser = stdin.readLineSync();
-
   String? today = "08/20/2021";
 
-  final x = "^XA"
+  final label = "^XA"
       "^CFE,30^FO12,30^FD$name^FS"
   "^FO310,120^BQN,2,6,Q,7^FD$userID^FS"
   "^FO12,80^FD$userID^FS"
@@ -29,7 +30,7 @@ void main() async {
 
 
   // connect to the socket server
-  final socket = await Socket.connect('172.19.69.188', 9100);
+  final socket = await Socket.connect(12, 12);
   print('Connected to: ${socket.remoteAddress.address}:${socket.remotePort}');
 
   // listen for responses from the server
@@ -54,13 +55,14 @@ void main() async {
     },
   );
 
-  await sendLabel(socket, x);
+  await sendLabel(socket, label);
 
 }
 
-Future<void> sendLabel(Socket socket, String message) async {
-  print('Client: $message');
-  socket.write(message);
+
+Future<void> sendLabel(Socket socket, String zebra_label) async {
+  print('Label Sent');
+  socket.write(zebra_label);
   await Future.delayed(Duration(seconds: 2));
 }
 
