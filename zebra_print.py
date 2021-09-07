@@ -1,3 +1,4 @@
+import sys
 import socket
 from datetime import date
 
@@ -6,11 +7,15 @@ today = today.strftime("%m/%d/%Y")
 
 mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-techbar_printer = {'ip': "172.19.69.188", 'port': 9100}
-onsite_printer = {'ip': "172.19.69.60", 'port': 9100}
+# set printer ip and port variables 
+# printer_ip = input('Printer IP Address: ')
+# printer_port = input('Port: ')
 
-printers = {'techbar_printer': techbar_printer, 'onsite_printer': onsite_printer}
-
+try:
+    printer = {'ip': printer_ip, 'port': printer_port}
+except NameError:
+    print('printer_ip and printer_port variables need to be defined before running script')
+    sys.exit(1)
 
 def print_label():
     # printer = input('Choose printer: ')
@@ -32,7 +37,7 @@ def print_label():
     x = x.encode()
 
     try:
-        mysocket.connect((techbar_printer['ip'], techbar_printer['port']))  # connecting to host
+        mysocket.connect((printer['ip'], printer['port']))  # connecting to host
         mysocket.send(x)  # using bytes
         mysocket.close()  # closing connection
     except:
