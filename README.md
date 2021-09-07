@@ -1,2 +1,2 @@
 # Zebra-laber-printer-scripts
-#test
+test
