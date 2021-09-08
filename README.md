@@ -1,6 +1,6 @@
 # Zebra-laber-printer-scripts
 
-<h2>Python zebra_print.py file</h2>
+Python zebra_print.py file
 
 To use the zebra_print.py file you must:
 1. Edit the file and define the printer_ip and printer_port variables.
